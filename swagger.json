@@ -1,0 +1,97 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "E-Commerce API",
+      "description": "API for user authentication and product management in an E-Commerce platform",
+      "version": "1.0.0"
+    },
+    "host": "localhost:3000",
+    "schemes": ["http"],
+    "paths": {
+      "/api/users/signIn": {
+        "post": {
+          "summary": "User login",
+          "description": "Logs in the user and provides a JWT token",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "User credentials",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "user@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "password123"
+                  }
+                },
+                "required": ["email", "password"]
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Token",
+              "schema": {
+                "type": "string",
+                "example": "jwt-token-here"
+              }
+            },
+            "401": {
+              "description": "Invalid Credentials"
+            }
+          }
+        }
+      },
+      "/api/users/signUp": {
+        "post": {
+          "summary": "User signup",
+          "description": "Creates a new user account",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "User details",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "john@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "password123"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "customer"
+                  }
+                },
+                "required": ["name", "email", "password", "type"]
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "User created successfully"
+            }
+          }
+        }
+      }
+    }
+  }
